@@ -24,6 +24,7 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
     const reviewsCollection = client.db("gamerDB").collection("reviews");
+    const blogsCollection = client.db("gamerDB").collection("reviews");
     const watchListCollection = client.db("gamerDB").collection("watchList");
     // const haiku = database;
 
@@ -111,6 +112,12 @@ async function run() {
     
     app.get("/allReviews", async(req, res) => {
       const cursor = reviewsCollection.find()
+      const result = await cursor.toArray();
+      res.send(result)
+    });
+    
+    app.get("/blogs", async(req, res) => {
+      const cursor = blogsCollection.find()
       const result = await cursor.toArray();
       res.send(result)
     });
